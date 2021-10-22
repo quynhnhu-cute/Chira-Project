@@ -13,6 +13,7 @@
     "@types/react-dom": "16.8.5",
     "@types/react-router-dom": "^4.3.4",
     "antd": "^4.16.13",
+    "axios": "^0.23.0",
     "bootstrap": "^4.6.0",
     "jquery": "^3.6.0",
     "node-sass": "^4.14.1",
