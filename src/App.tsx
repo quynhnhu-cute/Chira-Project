@@ -11,7 +11,6 @@ class App extends React.Component {
     return (
       <div className={styles.App}>
         <Router basename={process.env.PUBLIC_URL}>
-          {/* <XxxHeader /> */}
           <div>
             <Switch>
               <Route exact path="/" component={HomePage} />
