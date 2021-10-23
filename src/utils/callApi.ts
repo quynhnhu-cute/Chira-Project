@@ -1,21 +1,23 @@
-import axios from "axios";
+import axios, { AxiosPromise, AxiosRequestConfig } from "axios";
 import { BASE_URL } from "../settings/apiConfig";
 
-const callApi = ( endpoint: string, method = 'GET', data: any, token: any ) => { //
-    const object: {
-        url: string,
-        method: string,
-        data: any,
-        headers?: any,
-    } = {
+const callApi = ( endpoint: string, method: any, data: any, token: string | undefined ) => { //
+    const object: AxiosRequestConfig<any> 
+    // {
+    //     url: string,
+    //     method: string,
+    //     data: any,
+    //     headers?: any,
+    // } 
+    = {
         url: `${BASE_URL}/${endpoint}`,
-        method,
+        method: method,
         data,
         headers: token ? {
             Authorization: `Bearer ${token}`
-        } : null,
+        } : undefined,
     }
-    return axios(object)
+    return axios(object);
 }
 
 export default callApi;
