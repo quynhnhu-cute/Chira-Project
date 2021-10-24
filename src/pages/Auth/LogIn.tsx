@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import userApi from '../../apis/userApi';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-
+// import { useHistory } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
 export default function LogIn() {
-    const history = useHistory();
-    const dispatch = useDispatch();
+    const history = createBrowserHistory();
+    console.log(history);
+   
+    
     const [user, setUser] = useState({
         email: '',
         password: '',
