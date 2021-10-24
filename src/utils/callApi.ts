@@ -1,7 +1,7 @@
 import axios, { AxiosPromise, AxiosRequestConfig } from "axios";
-import { BASE_URL } from "../settings/apiConfig";
+import { BASE_URL, CYBERSOFT_TOKEN } from "../settings/apiConfig";
 
-const callApi = ( endpoint: string, method: any, data: any, token: string | undefined ) => { //
+const callApi = ( endpoint: string, method: any, data: any, token?: string | undefined, CSToken = CYBERSOFT_TOKEN ) => { //
     const object: AxiosRequestConfig<any> 
     // {
     //     url: string,
@@ -13,9 +13,10 @@ const callApi = ( endpoint: string, method: any, data: any, token: string | unde
         url: `${BASE_URL}/${endpoint}`,
         method: method,
         data,
-        headers: token ? {
-            Authorization: `Bearer ${token}`
-        } : undefined,
+        headers: {
+            Authorization: token ? `Bearer ${token}` : '',
+            TokenCyberSoft: CSToken
+        },
     }
     return axios(object);
 }

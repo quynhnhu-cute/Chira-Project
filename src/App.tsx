@@ -1,9 +1,11 @@
 import * as React from "react";
-import { HashRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import styles from "./App.module.scss";
-import { HomePage } from "./pages/home/HomePage";
-import { PageNotFound } from "./pages/page-not-found/PageNotFound";
+import { HomePage } from "./pages/User/home/HomePage";
+import { PageNotFound } from "./pages/General/page-not-found/PageNotFound";
+import LogIn from "./pages/Auth/LogIn";
+import Register from "./pages/Auth/Register";
 
 
 class App extends React.Component {
@@ -11,13 +13,14 @@ class App extends React.Component {
     return (
       <div className={styles.App}>
         <Router basename={process.env.PUBLIC_URL}>
-          <div>
+
             <Switch>
-              <Route exact path="/" component={HomePage} />
-            
-              <Route component={PageNotFound} />
+              <Route exact={true} path="/" component={HomePage} />
+              <Route path="/login" component={LogIn} />
+              <Route path="/register" component={Register} />
+              <Route path="*" component={PageNotFound} />
             </Switch>
-          </div>
+
         </Router>
       </div>
     );
