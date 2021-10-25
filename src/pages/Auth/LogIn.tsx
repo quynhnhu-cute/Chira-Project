@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import userApi from '../../apis/userApi';
-import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { actLogin } from './module/actions';
 
 export default function LogIn() {
@@ -23,14 +23,6 @@ export default function LogIn() {
     const handleSubmit = () => {
         console.log(user);
         dispatch(actLogin(user, history));
-        // userApi.loginApi(user)
-        //     .then(response => {
-        //         console.log(response);
-        //     })
-        //     .catch(error => {
-        //         console.log(error);
-        //         alert('Email or Password incorrect!')
-        //     });
 
     }
 

@@ -1,4 +1,4 @@
-import { LOGIN_FAIL, LOGIN_REQUEST, LOGIN_SUCCESS } from "./types";
+import { LOGIN_FAIL, LOGIN_REQUEST, LOGIN_SUCCESS, REGISTER_FAIL, REGISTER_REQUEST, REGISTER_SUCCESS } from "./types";
 
 const initialState: {
     currentUser: object | null,
@@ -22,12 +22,12 @@ const authReducer = (state = initialState, action: any) => {
             return { ...state, loading: false, error: payload }
         // case LOGOUT:
         //     return { ...state, currentUser: payload }
-        // case SIGNUP_REQUEST:
-        //     return { ...state, loading: true, error: null }
-        // case SIGNUP_SUCCESS:
-        //     return { ...state, loading: false, currentUser: payload }
-        // case SIGNUP_FAIL:
-        //     return { ...state, loading: false, error: payload }
+        case REGISTER_REQUEST:
+            return { ...state, loading: true, error: null }
+        case REGISTER_SUCCESS:
+            return { ...state, loading: false, currentUser: payload }
+        case REGISTER_FAIL:
+            return { ...state, loading: false, error: payload }
         // case FETCH_USER_DETAIL_REQUEST:
         //     return { ...state, loading: true, error: null }
         // case FETCH_USER_DETAIL_SUCCESS:

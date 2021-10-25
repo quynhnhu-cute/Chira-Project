@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
 import userApi from '../../apis/userApi';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { actRegister } from './module/actions';
 
 export default function Register() {
+    const history = useHistory();
+    const dispatch = useDispatch();
     const [user, setUser] = useState({
         email: '',
         password: '',
@@ -13,20 +18,13 @@ export default function Register() {
         const { name, value } = e.target;
         setUser(prevUser => ({
             ...prevUser,
-            [name]: value,
+            [name]: value.toString(),
         }))
     }
 
     const handleSubmit = () => {
         console.log(user);
-        userApi.registerApi(user)
-            .then(response => {
-                console.log(response);
-            })
-            .catch(error => {
-                console.log(error);
-                alert('Existed Email!')
-            });
+        dispatch(actRegister(user, history));
     }
 
     return (
