@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import userApi from '../../apis/userApi';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 
 export default function LogIn() {
     const history = useHistory();
