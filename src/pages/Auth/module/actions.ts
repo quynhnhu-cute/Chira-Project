@@ -6,9 +6,9 @@ const actLoginRequest = () => ({
     type: LOGIN_REQUEST,
 });
 
-const actLoginSuccess = (currentUser: any) => ({
+const actLoginSuccess = (data: any) => ({
     type: LOGIN_SUCCESS,
-    payload: currentUser,
+    payload: data.content,
 });
 
 const actLoginFail = (error: Error) => ({
@@ -27,6 +27,7 @@ export const actLogin = (user: object, history: any) => {
         })
         .catch(error => {
             console.log(error);
+            dispatch(actLoginFail(error));
             alert('Email or Password incorrect!')
         });
     }

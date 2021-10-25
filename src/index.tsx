@@ -13,10 +13,20 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'antd/dist/antd.css';
 // Import ant design ends
 import 'font-awesome/css/font-awesome.min.css';
+// Import redux store & redux-persist library
+// import { store, persistor } from './store/index.js';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react'
+import { persistor, store } from "store/store";
+// Import redux store & redux-persist library ends
 
 ReactDOM.render(
-<App />,
-document.getElementById("root"));
+    <Provider store={store}>
+        <PersistGate persistor={persistor} >
+            <App />
+        </PersistGate>
+    </Provider>,
+    document.getElementById("root"));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
