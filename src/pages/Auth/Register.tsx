@@ -1,32 +1,15 @@
-import React, { useState } from 'react';
-import userApi from '../../apis/userApi';
-import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import React from 'react';
 import { actRegister } from './module/actions';
 
-export default function Register() {
-    const history = useHistory();
-    const dispatch = useDispatch();
-    const [user, setUser] = useState({
-        email: '',
-        password: '',
-        name: '',
-        phoneNumb: ''
-    });
-
-    const handleChange = (e: any) => {
-        const { name, value } = e.target;
-        setUser(prevUser => ({
-            ...prevUser,
-            [name]: value.toString(),
-        }))
+export default function Register(
+    authProps : {
+        currentUser: object | null,
+        authFunctions: {
+            handleChange: React.ChangeEventHandler<HTMLInputElement>,
+            handleSubmit: (action: Function) => void,
+        }
     }
-
-    const handleSubmit = () => {
-        console.log(user);
-        dispatch(actRegister(user, history));
-    }
-
+) {
     return (
         <div className="d-flex flex-row justify-content-center" style={{ maxHeight: window.innerHeight, height: '100vh' }}>
             <div className="form-group container w-50 text-center mt-4">
@@ -36,26 +19,26 @@ export default function Register() {
                     name='email'
                     className="form-control my-3"
                     placeholder='Email'
-                    onChange={handleChange} />
+                    onChange={authProps.authFunctions.handleChange} />
                 <input
                     type="password"
                     name='password'
                     className="form-control my-3"
                     placeholder='Password'
-                    onChange={handleChange} />
+                    onChange={authProps.authFunctions.handleChange} />
                 <input
                     type="text"
                     name='name'
                     className="form-control my-3"
                     placeholder='Name'
-                    onChange={handleChange} />
+                    onChange={authProps.authFunctions.handleChange} />
                 <input
                     type="number"
                     name='phoneNumb'
                     className="form-control my-3"
                     placeholder='Phone Number'
-                    onChange={handleChange} />
-                <button className="btn btn-success btn-block" onClick={handleSubmit}>Sign Up</button>
+                    onChange={authProps.authFunctions.handleChange} />
+                <button className="btn btn-success btn-block" onClick={() => authProps.authFunctions.handleSubmit(actRegister)}>Sign Up</button>
                 <div className="mt-2">
                     <span>Already have an account?</span>
                     {' '}

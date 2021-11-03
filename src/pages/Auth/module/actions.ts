@@ -1,5 +1,5 @@
 import userApi from "apis/userApi";
-import { LOGIN_FAIL, LOGIN_REQUEST, LOGIN_SUCCESS, REGISTER_FAIL, REGISTER_REQUEST, REGISTER_SUCCESS } from "./types";
+import { LOGIN_FAIL, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT, REGISTER_FAIL, REGISTER_REQUEST, REGISTER_SUCCESS, TEST_TOKEN_FAIL, TEST_TOKEN_REQUEST, TEST_TOKEN_SUCCESS } from "./types";
 
 //////////// LOG IN ////////////
 const actLoginRequest = () => ({
@@ -64,3 +64,41 @@ export const actRegister = (user: object, history: any) => {
         });
     }
 }
+
+//////////// TEST TOKEN ////////////
+const actTestTokenRequest = () => ({
+    type: TEST_TOKEN_REQUEST,
+});
+
+const actTestTokenSuccess = (data: any) => ({
+    type: TEST_TOKEN_SUCCESS,
+    payload: data.content,
+});
+
+const actTestTokenFail = (error: Error) => ({
+    type: TEST_TOKEN_FAIL,
+    payload: error,
+});
+
+export const actTestToken = (accessToken: string, history: any | undefined) => {
+    return (dispatch: any) => {
+        dispatch(actTestTokenRequest());
+        userApi.testTokenApi(accessToken)
+        .then(response => {
+            console.log(response.data);
+            dispatch(actTestTokenSuccess(response.data));
+            // history.push('/');
+        })
+        .catch(error => {
+            console.log(error.message);
+            dispatch(actTestTokenFail(error));
+            // alert('Email or Password incorrect!');
+        });
+    }
+}
+
+//////////// LOG OUT ////////////
+export const actLogout = () => ({
+    type: LOGOUT,
+    payload: null,
+});

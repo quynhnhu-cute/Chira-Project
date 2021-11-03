@@ -31,3 +31,4 @@ const store = createStore(
 const persistor = persistStore(store);
 
 export { store, persistor };
+export type RootState = ReturnType<typeof rootReducer>

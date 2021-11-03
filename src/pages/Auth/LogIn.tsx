@@ -1,31 +1,15 @@
-import React, { useState } from 'react';
-import userApi from '../../apis/userApi';
-import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import React from 'react';
 import { actLogin } from './module/actions';
 
-export default function LogIn() {
-    const history = useHistory();
-    const dispatch = useDispatch();
-    const [user, setUser] = useState({
-        email: '',
-        password: '',
-    });
-
-    const handleChange = (e: any) => {
-        const { name, value } = e.target;
-        setUser(prevUser => ({
-            ...prevUser,
-            [name]: value,
-        }))
+export default function LogIn(
+    authProps : {
+        currentUser: object | null,
+        authFunctions: {
+            handleChange: React.ChangeEventHandler<HTMLInputElement>,
+            handleSubmit: (action: Function) => void,
+        }
     }
-
-    const handleSubmit = () => {
-        console.log(user);
-        dispatch(actLogin(user, history));
-
-    }
-
+) {
     return (
         <div className="d-flex flex-row justify-content-center" style={{ maxHeight: window.innerHeight, height: '100vh' }}>
             <img src="https://images.discerningassets.com/image/upload/c_fit,h_1000,w_1000/c_fit,fl_relative,h_1.0,l_ammaidtawnihnrcdopqc,o_40,w_1.0/v1530144929/colorado-photos_DSC0887-Edit-XL-Vert_mz4vfk.jpg" width="40%" alt="Login" />
@@ -36,14 +20,14 @@ export default function LogIn() {
                     name='email'
                     className="form-control my-3"
                     placeholder='Email'
-                    onChange={handleChange} />
+                    onChange={authProps.authFunctions.handleChange} />
                 <input
                     type="password"
                     name='password'
                     className="form-control my-3"
                     placeholder='Password'
-                    onChange={handleChange} />
-                <button className="btn btn-success btn-block" onClick={handleSubmit}>Log In</button>
+                    onChange={authProps.authFunctions.handleChange} />
+                <button className="btn btn-success btn-block" onClick={() => authProps.authFunctions.handleSubmit(actLogin)}>Log In</button>
                 <div className="social__media mt-2">
                     <button className="btn btn-primary">
                         <i className="fab fa-facebook">Face</i>
